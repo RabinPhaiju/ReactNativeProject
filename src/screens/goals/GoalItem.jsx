@@ -5,7 +5,7 @@ const GoalItem = ({removeGoalHandler,itemData}) => {
     <View style={styles.goalItem}>
       <Pressable 
       
-        onPress={()=>removeGoalHandler(itemData.item.id)}
+        onLongPress={()=>removeGoalHandler(itemData.item.id)}
         style={({pressed})=> pressed && styles.pressedItem}
         >
         <Text style={styles.goalText}>{itemData.item.text}</Text>
