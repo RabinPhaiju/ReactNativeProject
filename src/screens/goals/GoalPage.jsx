@@ -2,28 +2,50 @@ import React, { useState,useEffect } from 'react'
 import {Text,FlatList, View, Button, TextInput,StyleSheet, ScrollView,RefreshControl} from 'react-native';
 import GoalInput from './GoalInput'
 import GoalItem from './GoalItem'
+import SQLite from 'react-native-sqlite-storage';
+
+const db = SQLite.openDatabase({
+  name:'GoalDB',location:'default'
+},()=>{},
+error=>{console.log(error)})
 
 const GoalPage = ({navigation}) => {
   const [isRefreshing,setIsRefreshing]= useState(false)
-  const [courseGoals,setCouseGoals] = useState([
-    {text:'js',id:1},
-    {text:'react',id:2},
-    {text:'react-native',id:3},
-    {text:'python',id:4},
-    {text:'rust',id:5},
-    {text:'flask',id:6}
-  ])
+  const [courseGoals,setCouseGoals] = useState([])
   const [isModalVisible,setIsModalVisible] = useState(false)
 
+  const createTable = ()=>{
+    try{
+      db.transaction((tx)=>{
+        tx.executeSql(
+          "CREATE TABLE IF NOT EXISTS goals (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);"
+          )
+        })
+      }catch(error){console.log(error)}
+  }
+
   const addGoalHandler=(text)=>{
-    setCouseGoals(prev=>[{text:text,id:Math.random().toString()},...prev])
+       db.transaction((tx)=>{
+        // await tx.executeSql("INSERT INTO Goals (Name) VALUES ('"+text+"')");
+        tx.executeSql("INSERT INTO goals (name) VALUES (?)",[text],
+        (sqltxn,res)=>{
+          setCouseGoals(prev=>[{name:text,id:res?.insertId},...prev])
+        });
+      })
   }
 
   const removeGoalHandler = id=>{
-      setCouseGoals(prev=>[...prev.filter(p=>p.id!=id)])
+    db.transaction((tx)=>{
+      tx.executeSql("DELETE FROM goals WHERE id="+id,[],
+      (sqltxn,res)=>{
+        setCouseGoals(prev=>[...prev.filter(p=>p.id!=id)])
+      });
+    })
   }
 
   useEffect(()=>{
+    createTable()
+    getSQLiteData()
     navigation.setOptions({
       headerStyle:{
             backgroundColor:'#343345',
@@ -32,16 +54,36 @@ const GoalPage = ({navigation}) => {
     })
   },[])
 
+  const getSQLiteData = ()=>{
+         db.transaction((tx)=>{
+          tx.executeSql(
+            "SELECT * FROM goals ORDER BY id DESC",[],(tx,res)=>{
+              // console.log('courses retrive successful')
+              let len = res.rows.length;
+              if(len>0){
+                let results = []
+                for(let i = 0;i<len;i++){
+                  let item = res.rows.item(i);
+                  results.push({id:item.id,name:item.name})
+                }
+               setCouseGoals(results)
+              }
+            },
+            error =>{
+              // console.log("error on getting courses"+error.message)
+            }
+          )
+        })
+  }
+
 const onRefresh = ()=>{
   setIsRefreshing(true)
-  const id = courseGoals[courseGoals.length-1].id+1
-  setCouseGoals(prev=>[...prev, {text:'enjoy'+id,id:id}])
+  getSQLiteData()
   setIsRefreshing(false)
 }
 
   return (
       <View style = {styles.appContainer}>
-      <Text>Use db to store</Text>
       <ScrollView horizontal={true} style={{flex:1}}>
         {
           [1,2,3,4,5,6,7,8,9,10].map((item,index)=>{
