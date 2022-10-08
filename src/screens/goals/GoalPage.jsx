@@ -84,6 +84,7 @@ const onRefresh = ()=>{
 
   return (
       <View style = {styles.appContainer}>
+      <Text>Local Storage</Text>
       <ScrollView horizontal={true} style={{flex:1}}>
         {
           [1,2,3,4,5,6,7,8,9,10].map((item,index)=>{

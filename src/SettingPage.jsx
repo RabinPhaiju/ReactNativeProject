@@ -38,7 +38,6 @@ const SettingPage = () => {
 
   return (
     <View style={styles.body}>
-      <Text>SettingPage</Text>
       <Text>Async Storage</Text>
       <TextInput style={styles.input} value={name} onChangeText={handleNameChange} placeholder='Enter you name' />
       <View style={styles.button}>

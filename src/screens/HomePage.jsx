@@ -6,8 +6,7 @@ function HomePage({navigation}){
   const isDarkMode = useColorScheme() === 'dark';
   const [count,setCount] = useState(0)
   let data = [
-    {id:1,name:'rabin'},
-    {id:2,name:'sabin'}
+    {id:1,name:'rabin redux'}
   ]
 
   // useEffect(()=>{
@@ -31,9 +30,9 @@ function HomePage({navigation}){
     <ImageBackground style={styles.body}  source={{uri:'https://cutewallpaper.org/21/red-and-black-hd-wallpaper/Black-red-Wallpapers-Free-by-ZEDGEtm.jpg'}}>
     <SafeAreaView>
     <View>
-        <Text style={{fontSize:20,color:'black',textAlign:'center'}} >Home Page</Text>
-          <View style={{flexDirection:'column',gap:2,justifyContent:'space-around',alignItems:'center',width:'100%'}}>
-            <Button title='Detail Page'onPress={()=>navigation.push('Detail',data)}/>
+          <View style={styles.pages}>
+            <Button title='Redux Page'onPress={()=>navigation.push('ReduxPage',data)}/>
+            <Button title='Test Redux Page'onPress={()=>navigation.push('TestRedux')}/>
             <Button title='Setting Page'onPress={()=>navigation.push('Setting')}/>
             <Button title='Goal Page'onPress={()=>navigation.push('Goals')}/>
             </View>
@@ -46,6 +45,14 @@ function HomePage({navigation}){
 const styles = StyleSheet.create({
   body:{
     flex:1
+  },
+  pages:{
+    paddingTop:20,
+    justifyContent:'space-around',
+    flexDirection:'column',
+    alignItems:'center',
+    width:'100%',
+    gap:2,
   }
 })
 
