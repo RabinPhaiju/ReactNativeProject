@@ -33,7 +33,6 @@ function HomePage({navigation}){
           <View style={styles.pages}>
             <Button title='Redux Page'onPress={()=>navigation.push('ReduxPage',data)}/>
             <Button title='Test Redux Page'onPress={()=>navigation.push('TestRedux')}/>
-            <Button title='Setting Page'onPress={()=>navigation.push('Setting')}/>
             <Button title='Goal Page'onPress={()=>navigation.push('Goals')}/>
             </View>
         </View>

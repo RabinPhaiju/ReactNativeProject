@@ -42,4 +42,4 @@
         - for wlan (deviceId->adb devices)
           - npx react-native run-android --deviceId='192.168.254.4:1031' 
         - for wired (deviceId->adb devices)
-          -  npx react-native run-android --deviceId='[device_id' 
+          -  npx react-native run-android --deviceId='[device_id']

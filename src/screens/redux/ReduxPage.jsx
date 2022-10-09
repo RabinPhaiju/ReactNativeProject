@@ -4,6 +4,8 @@ import {useDispatch,useSelector} from "react-redux"
 import { addUser,removeUser } from '../../redux/features/userSlice';
 import { SafeAreaView, Text, TextInput, FlatList, View, Button,StyleSheet,Pressable} from 'react-native';
 
+import PushNotification,{Importance} from 'react-native-push-notification';
+
 const ReduxPage = ({route,navigation}) => {
   let DATA = route.params
   const dispatch = useDispatch();
@@ -13,6 +15,7 @@ const ReduxPage = ({route,navigation}) => {
 
   useEffect(()=>{
     navigation.setOptions({title:DATA[0].name})
+    createChannels()
     },[])
 
   const handleUserSubmit = ()=>{
@@ -20,10 +23,46 @@ const ReduxPage = ({route,navigation}) => {
     dispatch(addUser({id:id,name:name,email:email}))
     setName("")
     setEmail("")
+    // handleNotification()
+    handleNotificationSchedule()
   }
 
   const removeUserHandler=(user)=>{
     dispatch(removeUser(user))
+  }
+
+  const createChannels = ()=>{
+    PushNotification.createChannel(
+      {
+        channelId: "redux-channel",
+        channelName: "Redux Channel",
+        channelDescription: "A channel to categorise your notifications",
+        importance: Importance.HIGH,
+        vibrate: true
+      },
+    );
+  }
+
+  const handleNotification = ()=>{
+    PushNotification.cancelAllLocalNotifications()
+    PushNotification.localNotification({
+      channelId:"redux-channel",
+      title:"User added!",
+      message:name,
+      color:'red',
+      id:1
+    })
+  }
+  const handleNotificationSchedule = (seconds=20)=>{
+    PushNotification.localNotificationSchedule({
+      channelId:"redux-channel",
+      title:"User added!",
+      message:name,
+      color:'red',
+      id:1,
+      date:new Date(Date.now()+seconds * 1000),
+      allowWhileIdle:true
+    })
   }
 
   return (
