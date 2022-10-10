@@ -36,6 +36,7 @@ function HomePage({navigation}){
             <Button title='Goal Page'onPress={()=>navigation.push('Goals')}/>
             <Button title='Camera Page'onPress={()=>navigation.push('Camera')}/>
             <Button title='TopTabNavigator'onPress={()=>navigation.push('TopTabNavigator')}/>
+            <Button title='Canvas Page'onPress={()=>navigation.push('Canvas')}/>
             </View>
         </View>
         </SafeAreaView>

@@ -62,7 +62,7 @@ const CameraPage = () => {
     if(event.type === 'left'){setIsPermitted(false)}
     else if(event.type === 'right'){setIsPermitted(false); setCaptureImages(event.captureImages);}
     else{
-      setCaptureImages(prev=>[...prev,event.captureImages])
+      setCaptureImages(event.captureImages)
       // Alert.alert(event.type,images,[{text:'Ok',onPress:()=>console.log('images',images)}],{cancelable:false})
     }
   }
@@ -90,13 +90,9 @@ const CameraPage = () => {
           </TouchableHighlight>
           <ScrollView>
           <View style={{flex:1,flexDirection:'row',flexWrap:'wrap'}}>
-          {captureImages.length>0 && captureImages.map(image=>{
+          {captureImages.length>0 && captureImages.map((image,index)=>{
             return(
-              <View style={{padding:2}}>
-              <Image  style={{height:200,width:200}} source={{
-                uri: image.uri,
-              }}/>
-              </View>
+              <View style={{padding:2}} key={index} ><Image  style={{height:200,width:200}} source={{ uri: image.uri,}}/></View>
             )})}
             </View>
             </ScrollView>

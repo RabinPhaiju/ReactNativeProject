@@ -19,6 +19,7 @@ import SettingPage from './src/SettingPage';
 import TestRedux from './src/screens/redux/TextRedux'
 import CameraPage from './src/screens/CameraPage'
 import TopTabNavigator from './src/screens/topTabNavigator/TopTabNavigator'
+import CanvasPage from './src/screens/canvas/CanvasPage'
 
 const HomeStack = createNativeStackNavigator();
 
@@ -46,6 +47,7 @@ const App=()=>{
         <HomeStack.Screen name="Setting" component={SettingPage} />
         <HomeStack.Screen name="Camera" component={CameraPage}  />
         <HomeStack.Screen name="TopTabNavigator" component={TopTabNavigator}  />
+        <HomeStack.Screen name="Canvas" component={CanvasPage}  />
       </HomeStack.Navigator>
     </NavigationContainer>
     </Provider>
