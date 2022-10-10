@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useColorScheme, StyleSheet, Text, Image, View, Button, ImageBackground} from 'react-native';
+import { useColorScheme, StyleSheet, Text, Image, View, Button, ImageBackground, Dimensions} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 function HomePage({navigation}){
@@ -35,6 +35,7 @@ function HomePage({navigation}){
             <Button title='Test Redux Page'onPress={()=>navigation.push('TestRedux')}/>
             <Button title='Goal Page'onPress={()=>navigation.push('Goals')}/>
             <Button title='Camera Page'onPress={()=>navigation.push('Camera')}/>
+            <Button title='TopTabNavigator'onPress={()=>navigation.push('TopTabNavigator')}/>
             </View>
         </View>
         </SafeAreaView>
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
     justifyContent:'space-around',
     flexDirection:'column',
     alignItems:'center',
-    width:'100%',
+    width:Dimensions.get('window').width,
     gap:2,
   }
 })
