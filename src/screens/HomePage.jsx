@@ -34,6 +34,7 @@ function HomePage({navigation}){
             <Button title='Redux Page'onPress={()=>navigation.push('ReduxPage',data)}/>
             <Button title='Test Redux Page'onPress={()=>navigation.push('TestRedux')}/>
             <Button title='Goal Page'onPress={()=>navigation.push('Goals')}/>
+            <Button title='Camera Page'onPress={()=>navigation.push('Camera')}/>
             </View>
         </View>
         </SafeAreaView>
