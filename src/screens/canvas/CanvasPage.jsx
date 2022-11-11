@@ -6,7 +6,7 @@ import Canvas, {Image as CanvasImage, Path2D, ImageData} from 'react-native-canv
 // canvas context.isPointOnPath dont work, 
 // the position where the canvas was pressed can be found out but, the function wont work (isPointOnPath)
 
-const WIDTH = Dimensions.get('window').width*0.97;
+const WIDTH = Dimensions.get('window').width*0.98;
 const HEIGHT = WIDTH*0.8
 
 const CanvasPage=({scale=1})=> {
@@ -17,18 +17,18 @@ const CanvasPage=({scale=1})=> {
 
   const kundaliLines = (w, h) => {
     return [
-      {move: [w/4, h/4], line1: [w/2, 0],line2:[w/4*3, h/4],line3:[w/2, h/2]},
-      {move: [0, 0], line1: [w/2, 0],line2:[w/4,h/4]},
-      {move: [0, h/2], line1: [0, 0],line2:[w/4, h/4]},
-      {move: [0, h/2], line1: [w/4, h/4],line2:[w/2, h/2],line3:[w/4, h/4*3]},
-      {move: [0, h], line1: [0, h/2],line2:[w/4, h/4*3]},
-      {move: [w/2, h], line1: [0, h],line2:[w/4, h/4*3]},
+      {move: [w/4, h/4], line1: [w/2, 1],line2:[w/4*3, h/4],line3:[w/2, h/2]},
+      {move: [1, 1], line1: [w/2, 1],line2:[w/4,h/4]},
+      {move: [1, h/2], line1: [1,1],line2:[w/4, h/4]},
+      {move: [1, h/2], line1: [w/4, h/4],line2:[w/2, h/2],line3:[w/4, h/4*3]},
+      {move: [1, h], line1: [1, h/2],line2:[w/4, h/4*3]},
+      {move: [w/2, h], line1: [1, h],line2:[w/4, h/4*3]},
       {move: [w/4, h/4*3], line1: [w/2, h/2],line2:[w/4*3, h/4*3],line3:[w/2, h]},
       {move: [w, h], line1: [w/2, h],line2:[w/2/2*3, h/4*3]},
       {move: [w, h/2], line1: [w, h],line2:[w/2/2*3, h/4*3]},
       {move: [w/2, h/2], line1: [w/4*3, h/4],line2:[w, h/2],line3:[w/4*3, h/4*3]},
-      {move: [w, 0], line1: [w, h/2],line2:[w/4*3, h/4]},
-      {move: [w/2, 0], line1: [w, 0],line2:[w/4*3, h/4]},
+      {move: [w, 1], line1: [w, h/2],line2:[w/4*3, h/4]},
+      {move: [w/2, 1], line1: [w, 1],line2:[w/4*3, h/4]},
     ];
   }
 
@@ -75,7 +75,7 @@ const CanvasPage=({scale=1})=> {
     kundali_path2D = []
     // reDrawKundaliOnVariantChange(canvasRef);
 
-    kundali_path2D = kundaliLines(WIDTH.toFixed(0), HEIGHT.toFixed(0)).map((line, index) => {
+    kundali_path2D = kundaliLines(WIDTH-2, HEIGHT-2).map((line, index) => {
         let kundaliPathInit = new Path2D(canvasRef.current)
         kundaliPathInit.moveTo(line.move[0]*scale, line.move[1]*scale);
         kundaliPathInit.lineTo(line.line1[0]*scale, line.line1[1]*scale);

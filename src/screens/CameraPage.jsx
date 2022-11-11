@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react'
-import { Alert, PermissionsAndroid, Platform, Text, TouchableHighlight, View,Image, ScrollView} from 'react-native';
+import { Alert, PermissionsAndroid, Platform, Text, TouchableHighlight, View,Image, ScrollView,Dimensions} from 'react-native';
 import { CameraScreen } from 'react-native-camera-kit';
 
 const CameraPage = () => {
@@ -92,7 +92,7 @@ const CameraPage = () => {
           <View style={{flex:1,flexDirection:'row',flexWrap:'wrap'}}>
           {captureImages.length>0 && captureImages.map((image,index)=>{
             return(
-              <View style={{padding:2}} key={index} ><Image  style={{height:200,width:200}} source={{ uri: image.uri,}}/></View>
+              <View style={{padding:4}} key={index} ><Image  style={{height:200,width:Dimensions.get('window').width/2.1}} source={{ uri: image.uri,}}/></View>
             )})}
             </View>
             </ScrollView>
